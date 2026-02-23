@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0E3F3B" />
+  <title>Criatório Zago • Reprodução de Coleiro e Papa-Capim</title>
+  <meta name="description" content="Portal oficial do Criatório Zago: reprodução, manejo, encartes, notícias, matérias com veterinários e contato. Coleiro e Papa-Capim." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Criatório Zago" />
+  <meta property="og:description" content="Reprodução, manejo, encartes e conteúdo técnico sobre Coleiro e Papa-Cim." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      /* Paleta inspirada no seu logo */
+      --bg: #F6EAD2;          /* bege/creme */
+      --surface: #FFF8EA;     /* cartão claro */
+      --ink: #0B1E1C;         /* texto */
+      --muted: rgba(11,30,28,.70);
+      --green: #0E3F3B;       /* verde escuro */
+      --green-2: #0B2F2C;     /* verde mais fechado */
+      --gold: #B8862B;        /* dourado */
+      --gold-2: #9A6E1F;      /* dourado escuro */
+      --line: rgba(14,63,59,.18);
+      --shadow: 0 18px 50px rgba(11,30,28,.10);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(184,134,43,.18), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(14,63,59,.16), transparent 55%),
+        linear-gradient(180deg, var(--bg), #F2E3C8);
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    img{ max-width:100%; display:block; }
+
+    .wrap{ width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    /* Top bar */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(246,234,210,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 210px;
+    }
+    .brand .mark{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(184,134,43,.55);
+      box-shadow: 0 10px 24px rgba(11,30,28,.10);
+      background: var(--surface);
+      flex: 0 0 auto;
+    }
+    .brand .text{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .brand .text strong{
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--green);
+    }
+    .brand .text span{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .links{
+      display:none;
+      gap: 18px;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+    }
+    .links a{
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: var(--green);
+      font-weight: 650;
+      letter-spacing: .2px;
+      text-decoration: none;
+    }
+    .links a:hover{
+      background: rgba(14,63,59,.07);
+      text-decoration: none;
+    }
+
+    .actions{ display:flex; gap: 10px; align-items:center; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 10px 25px rgba(11,30,28,.06);
+      font-weight: 750;
+      letter-spacing: .2px;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); text-decoration:none; border-color: rgba(184,134,43,.35); }
+    .btn.primary{
+      background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      color: #fff;
+      border-color: rgba(184,134,43,.55);
+      box-shadow: 0 18px 40px rgba(154,110,31,.22);
+    }
+    .btn.ghost{
+      background: transparent;
+      box-shadow: none;
+    }
+    .hamburger{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,248,234,.8);
+      display:inline-flex;
+      align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger:active{ transform: translateY(1px); }
+
+    /* Mobile drawer */
+    .drawer{
+      display:none;
+      border-top: 1px solid var(--line);
+      padding: 10px 0 14px;
+    }
+    .drawer a{
+      display:block;
+      padding: 12px 10px;
+      border-radius: 14px;
+      color: var(--green);
+      font-weight: 750;
+      text-decoration:none;
+    }
+    .drawer a:hover{ background: rgba(14,63,59,.07); }
+
+    /* Hero */
+    .hero{
+      padding: 28px 0 10px;
+    }
+    .heroGrid{
+      display:grid;
+      gap: 18px;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+    .card{
+      background: rgba(255,248,234,.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroCard{
+      padding: 20px;
+      position: relative;
+      isolation: isolate;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(14,63,59,.08);
+      border: 1px solid rgba(14,63,59,.12);
+      color: var(--green);
+      font-weight: 800;
+      letter-spacing: .2px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .heroTitle{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 4.3vw, 44px);
+      line-height: 1.06;
+      letter-spacing: -0.8px;
+      color: var(--green-2);
+    }
+    .heroTitle em{
+      font-style: normal;
+      color: var(--gold-2);
+    }
+    .heroText{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+    .heroCtas{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .stats{
+      display:grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 18px;
+    }
+    .stat{
+      padding: 12px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(14,63,59,.06);
+      border: 1px solid rgba(14,63,59,.10);
+    }
+    .stat strong{
+      display:block;
+      color: var(--green);
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .stat span{
+      display:block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+
+    .logoCard{
+      padding: 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 220px;
+      position: relative;
+    }
+    .logoFrame{
+      width: min(320px, 100%);
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background: radial-gradient(circle at 30% 25%, rgba(184,134,43,.25), transparent 55%),
+                  radial-gradient(circle at 70% 0%, rgba(14,63,59,.18), transparent 55%),
+                  rgba(255,248,234,.7);
+      border: 1px solid rgba(184,134,43,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      box-shadow: 0 22px 55px rgba(11,30,28,.14);
+    }
+    .logoFrame img{
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 18px 26px rgba(11,30,28,.18));
+    }
+
+    /* Sections */
+    section{ padding: 18px 0; }
+    .sectionHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      margin: 10px 0 12px;
+    }
+    h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+      color: var(--green-2);
+    }
+    .hint{ margin:0; color: var(--muted); font-size: 13px; }
+
+    .grid{
+      display:grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    .tile{
+      padding: 16px;
+      border-radius: var(--radius);
+      background: rgba(255,248,234,.92);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 34px rgba(11,30,28,.08);
+    }
+    .tile h3{
+      margin: 0 0 6px;
+      font-size: 15.5px;
+      color: var(--green);
+      letter-spacing: -0.2px;
+    }
+    .tile p{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; }
+    .chip{
+      font-size: 12px;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(14,63,59,.12);
+      background: rgba(14,63,59,.06);
+      color: var(--green);
+    }
+
+    .list{
+      display:grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .list li{
+      padding: 12px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(14,63,59,.12);
+      background: rgba(255,248,234,.78);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .list li strong{ color: var(--green); font-size: 13.5px; }
+    .list li span{ color: var(--muted); font-size: 12.5px; line-height: 1.45; display:block; margin-top: 3px; }
+
+    /* Footer */
+    footer{
+      padding: 18px 0 26px;
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+      background: rgba(246,234,210,.65);
+    }
+    .footerGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .fine{
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+    .miniRow{ display:flex; gap: 10px; flex-wrap: wrap; }
+
+    /* Responsive */
+    @media (min-width: 860px){
+      .links{ display:flex; }
+      .hamburger{ display:none; }
+      .drawer{ display:none !important; }
+      .hero{ padding: 34px 0 14px; }
+      .heroGrid{ grid-template-columns: 1.4fr .9fr; }
+      .logoCard{ min-height: 100%; }
+      .stats{ grid-template-columns: repeat(4, 1fr); }
+      .grid{ grid-template-columns: repeat(3, 1fr); }
+      .footerGrid{ grid-template-columns: 1.2fr .8fr; }
+    }
+
+    /* Accessible focus */
+    :focus-visible{
+      outline: 3px solid rgba(184,134,43,.55);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#topo" aria-label="Ir para o topo">
+          <div class="mark" aria-hidden="true">
+            <!-- Coloque o arquivo do logo na mesma pasta do index.html e ajuste o nome abaixo se necessário -->
+            <img src="logo.png" alt="Logo Criatório Zago" />
+          </div>
+          <div class="text">
+            <strong>Criatório Zago</strong>
+            <span>Coleiro • Papa-Capim • Reprodução</span>
+          </div>
+        </a>
+
+        <nav class="links" aria-label="Navegação principal">
+          <a href="#reproducao">Reprodução</a>
+          <a href="#encartes">Encarte</a>
+          <a href="#noticias">Notícias</a>
+          <a href="#materias">Matérias</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="actions">
+          <!-- Troque os links abaixo pelos seus -->
+          <a class="btn ghost" href="https://www.youtube.com/channel/UCI1XFd6l6Sp7c1HFP6Fi0mQ" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a class="btn primary" href="https://www.youtube.com/channel/UCI1XFd6l6Sp7c1HFP6Fi0mQ/join" target="_blank" rel="noopener noreferrer">Seja Membro</a>
+
+          <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7H20" stroke="#0E3F3B" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="#0E3F3B" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 17H20" stroke="#0E3F3B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer" id="drawer">
+        <a href="#reproducao">Reprodução</a>
+        <a href="#encartes">Encarte</a>
+        <a href="#noticias">Notícias</a>
+        <a href="#materias">Matérias</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="topo" class="wrap">
+    <div class="hero">
+      <div class="heroGrid">
+        <div class="card heroCard">
+          <div class="badge">Conteúdo técnico e prático • Criatório</div>
+          <h1 class="heroTitle">
+            Coleiro e Papa-Capim com foco em <em>reprodução</em>, manejo e resultados.
+          </h1>
+          <p class="heroText">
+            Aqui você encontra informações organizadas sobre preparo de casal, manejo de ninho, alimentação,
+            ambientação, calendário e cuidados. Além disso, encartes, notícias do mundo dos pássaros e matérias com
+            veterinários e especialistas.
+          </p>
+
+          <div class="heroCtas">
+            <!-- Ajuste para os links reais do canal e membros -->
+            <a class="btn primary" href="https://www.youtube.com/channel/UCI1XFd6l6Sp7c1HFP6Fi0mQ" target="_blank" rel="noopener noreferrer">Acessar Canal</a>
+            <a class="btn" href="https://www.agrozago.com.br">Ver Encarte</a>
+            <a class="btn" href="#contato">Falar Comigo</a>
+          </div>
+
+          <div class="stats" aria-label="Destaques do portal">
+            <div class="stat">
+              <strong>Reprodução</strong>
+              <span>Checklist e tópicos essenciais para iniciar do jeito certo.</span>
+            </div>
+            <div class="stat">
+              <strong>Manejo</strong>
+              <span>Rotina, ambiente, higiene e sinais de acasalamento.</span>
+            </div>
+            <div class="stat">
+              <strong>Encarte</strong>
+              <span>Materiais organizados para facilitar o seu dia a dia.</span>
+            </div>
+            <div class="stat">
+              <strong>Veterinários</strong>
+              <span>Matérias e orientações com foco em bem-estar.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card logoCard" aria-label="Logo do Criatório Zago">
+          <div class="logoFrame">
+            <img src="logo.png" alt="Criatório Zago" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPRODUÇÃO -->
+    <section id="reproducao">
+      <div class="sectionHead">
+        <div>
+          <h2>Reprodução • Do Zero ao Avançado</h2>
+          <p class="hint">Estrutura pronta para você preencher com seus métodos e vídeos específicos do canal.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="tile">
+          <h3>1) Preparação do casal</h3>
+          <p>
+            Organização do ambiente, separação com proximidade, observação de comportamento e sinais de aceitação.
+            Inclua aqui seu protocolo de adaptação e tempo médio.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Ambientação</span>
+            <span class="chip">Comportamento</span>
+            <span class="chip">Calendário</span>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>2) Ninho e material</h3>
+          <p>
+            Tipos de ninho, posicionamento ideal, materiais seguros, prevenção de estresse e pontos críticos
+            que fazem o casal abandonar o ninho.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Ninho</span>
+            <span class="chip">Materiais</span>
+            <span class="chip">Segurança</span>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>3) Ovos, choco e filhotes</h3>
+          <p>
+            Rotina de checagem, como evitar excesso de manuseio, alimentação de suporte e o que observar nos
+            primeiros dias (sem estressar a fêmea).
+          </p>
+          <div class="chipRow">
+            <span class="chip">Choco</span>
+            <span class="chip">Filhotes</span>
+            <span class="chip">Nutrição</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ENCARTE -->
+    <section id="encartes">
+      <div class="sectionHead">
+        <div>
+          <h2>Encarte • Materiais e Conteúdos Organizados</h2>
+          <p class="hint">Crie seus links de compra/entrega e listas do que o encarte inclui.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="tile">
+          <h3>Encarte de Reprodução</h3>
+          <p>
+            Conteúdo focado em rotina, organização, preparação, checklist e materiais. Ideal para quem quer um
+            passo a passo rápido e aplicável.
+          </p>
+          <div class="heroCtas">
+            <a class="btn" href="#contato">Quero o Encarte</a>
+            <a class="btn ghost" href="#materias">Ver Matérias</a>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Encarte Coleiro</h3>
+          <p>
+            Seção dedicada a coleiro: manejo, dicas práticas, ajustes finos e pontos de atenção para evitar erros
+            comuns na temporada.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Coleiro</span>
+            <span class="chip">Rotina</span>
+            <span class="chip">Temporada</span>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Encarte Papa-Capim</h3>
+          <p>
+            Seção dedicada a papa-capim: ambiente, pareamento, comportamento e cuidados essenciais com foco em resultado
+            e bem-estar.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Papa-Capim</span>
+            <span class="chip">Pareamento</span>
+            <span class="chip">Bem-estar</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- NOTÍCIAS -->
+    <section id="noticias">
+      <div class="sectionHead">
+        <div>
+          <h2>Notícias • Atualizações do Mundo dos Pássaros</h2>
+          <p class="hint">Você pode atualizar essas entradas semanalmente e linkar para vídeos/shorts.</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding:16px;">
+        <ul class="list" aria-label="Lista de notícias">
+          <li>
+            <div>
+              <strong>Temporada de reprodução: pontos de atenção</strong>
+              <span>Resumo curto + link para vídeo explicando preparo do casal e erros mais comuns.</span>
+            </div>
+            <a class="btn" href="#" style="padding:10px 12px;">Ler</a>
+          </li>
+          <li>
+            <div>
+              <strong>Manejo e bem-estar: o que evitar</strong>
+              <span>Checklist de estresse, posição de gaiola, barulho, rotina e manuseio.</span>
+            </div>
+            <a class="btn" href="#" style="padding:10px 12px;">Ler</a>
+          </li>
+          <li>
+            <div>
+              <strong>Alimentação de suporte na fase crítica</strong>
+              <span>O básico que funciona + como você organiza no Criatório Zago.</span>
+            </div>
+            <a class="btn" href="#" style="padding:10px 12px;">Ler</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MATÉRIAS COM VETERINÁRIOS -->
+    <section id="materias">
+      <div class="sectionHead">
+        <div>
+          <h2>Matérias com Veterinários • Conteúdo Técnico</h2>
+          <p class="hint">Estruture como “perguntas e respostas” e sempre inclua orientação profissional.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="tile">
+          <h3>Fertilidade, postura e sinais de problema</h3>
+          <p>
+            Tópicos: quando investigar, sinais de estresse, deficiência nutricional, ambiente e condutas seguras.
+            (Inclua o nome do profissional e data do material.)
+          </p>
+          <div class="chipRow">
+            <span class="chip">Fertilidade</span>
+            <span class="chip">Postura</span>
+            <span class="chip">Prevenção</span>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Saúde respiratória e ambiente</h3>
+          <p>
+            Tópicos: ventilação, poeira, variações de temperatura, higiene e quando procurar atendimento.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Respiração</span>
+            <span class="chip">Higiene</span>
+            <span class="chip">Ambiente</span>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Suplementação: o que faz sentido</h3>
+          <p>
+            Tópicos: base alimentar, suplementação com objetivo claro, riscos de excessos e boas práticas.
+          </p>
+          <div class="chipRow">
+            <span class="chip">Nutrição</span>
+            <span class="chip">Rotina</span>
+            <span class="chip">Segurança</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="fine" style="margin-top:12px;">
+        Aviso: este site pode hospedar informações educativas. Para qualquer problema de saúde, procure um veterinário
+        de confiança. Não substitui avaliação profissional.
+      </p>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="sectionHead">
+        <div>
+          <h2>Contato • Links Oficiais</h2>
+          <p class="hint">Preencha os links reais do seu canal e do “Seja Membro”.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="tile">
+          <h3>YouTube (Canal)</h3>
+          <p>Assista aos vídeos completos, séries de reprodução e atualizações do Criatório Zago.</p>
+          <div class="heroCtas">
+            <a class="btn primary" href="https://www.youtube.com/channel/UCI1XFd6l6Sp7c1HFP6Fi0mQ" target="_blank" rel="noopener noreferrer">Abrir Canal</a>
+            <a class="btn" href="#noticias">Ver Notícias</a>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Seja Membro</h3>
+          <p>Conteúdo exclusivo, bastidores do criatório, segredos de rotina e materiais adicionais.</p>
+          <div class="heroCtas">
+            <a class="btn primary" href="https://www.youtube.com/channel/UCI1XFd6l6Sp7c1HFP6Fi0mQ/join" target="_blank" rel="noopener noreferrer">Área de Membros</a>
+            <a class="btn" href="https://www.agrozago.com.br">Encarte</a>
+          </div>
+        </article>
+
+        <article class="tile">
+          <h3>Fale Comigo</h3>
+          <p>Para dúvidas, parcerias e pedidos de encarte, use um canal oficial de contato.</p>
+          <div class="heroCtas">
+            <!-- Troque para seu e-mail/WhatsApp/Instagram, se quiser -->
+            <a class="btn" href="mailto:contato@seudominio.com">Enviar e-mail</a>
+            <a class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footerGrid">
+        <div>
+          <p class="fine">
+            <strong style="color:var(--green);">Criatório Zago</strong><br/>
+            Portal do canal com foco em reprodução, manejo e conteúdos organizados (encartes, notícias e matérias técnicas).
+          </p>
+          <p class="fine">
+            Dica para GitHub Pages: suba este <code>index.html</code> e o arquivo do logo na mesma pasta do repositório.
+            Se o nome do arquivo do logo for diferente, ajuste no <code>src</code> das imagens.
+          </p>
+        </div>
+
+        <div>
+          <p class="fine" style="margin-bottom:10px;"><strong style="color:var(--green);">Acesso rápido</strong></p>
+          <div class="miniRow">
+            <a class="btn" href="#reproducao">Reprodução</a>
+            <a class="btn" href="#encartes">Encarte</a>
+            <a class="btn" href="#materias">Veterinários</a>
+            <a class="btn" href="#contato">Contato</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="fine" style="margin-top:14px;">
+        © <span id="year"></span> Criatório Zago. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Ano automático no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const btn = document.getElementById("hamburger");
+    const drawer = document.getElementById("drawer");
+    btn?.addEventListener("click", () => {
+      const open = drawer.style.display === "block";
+      drawer.style.display = open ? "none" : "block";
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+
+    // Fecha drawer ao clicar em link
+    drawer?.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        drawer.style.display = "none";
+        btn.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
